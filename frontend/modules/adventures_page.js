@@ -5,21 +5,65 @@ import config from "../conf/index.js";
 function getCityFromURL(search) {
   // TODO: MODULE_ADVENTURES
   // 1. Extract the city id from the URL's Query Param and return it
+  console.log(search,"hti is")
+ 
+  const url = new URL(`http://43.204.122.85:8082/frontend/pages/adventures/${search}`);
+  const params = new URLSearchParams(url.search);
 
+  console.log(params.get("city"));
+  let b = params.get("city");
+  return b;
 }
 
 //Implementation of fetch call with a paramterized input based on city
 async function fetchAdventures(city) {
   // TODO: MODULE_ADVENTURES
   // 1. Fetch adventures using the Backend API and return the data
-
+  try{
+    console.log(city,"khh")
+    let data =await fetch(`http://43.204.122.85:8082/adventures?city=${city}`);
+    console.log(data,"hh")
+    let resp =await data.json();
+    console.log("the ",resp,"the")
+    return resp;
+  }catch(error){
+    console.log(error,"hii");
+    return null;
+  }
+      
 }
 
 //Implementation of DOM manipulation to add adventures for the given city from list of adventures
 function addAdventureToDOM(adventures) {
   // TODO: MODULE_ADVENTURES
   // 1. Populate the Adventure Cards and insert those details into the DOM
+   console.log(adventures);
+   let docElement =document.createElement("div");
+     docElement.className= "activity-card col-4";
+      // let innerDOc = document.createElement("div");
+      let innerDOc = document.createElement("div");
 
+   for(let i=0;i<adventures.length;i++){
+console.log(adventures[i].image);
+    let innerhtml= `<a id=${adventures[i].id} href="detail/?adventure=${adventures[i].id}><img id=${adventures[i].id} src="${adventures[i].image}" class="activity-card img"/></a> 
+   <div class="special"> <p>${adventures[i].name}</p> <p>${adventures[i].costPerHead}</p><div>
+   <div class="special"> <p class="category-banner">${adventures[i].category}</p><p>${adventures[i].duration}</p></div>`
+    // innerhtml.className="activity-card"
+    
+    // innerDOc.append(innerhtml);
+    // .className= "activity-card";
+
+    innerDOc.className="activity-card ";
+    innerDOc.innerHTML=innerhtml;
+    innerDOc.className="activity-card ";
+    //docElement.append(innerhtml)
+    console.log(innerhtml);
+   }
+     
+
+    // docElement.innerHTML= innerDOc;
+     document.getElementById("data").appendChild(innerDOc);
+  
 }
 
 //Implementation of filtering by duration which takes in a list of adventures, the lower bound and upper bound of duration and returns a filtered list of adventures.
@@ -30,7 +74,7 @@ function filterByDuration(list, low, high) {
 }
 
 //Implementation of filtering by category which takes in a list of adventures, list of categories to be filtered upon and returns a filtered list of adventures.
-function filterByCategory(list, categoryList) {
+function filterByCategory(list, categoryList) {e
   // TODO: MODULE_FILTERS
   // 1. Filter adventures based on their Category and return filtered list
 
