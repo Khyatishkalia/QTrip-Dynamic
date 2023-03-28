@@ -17,7 +17,7 @@ async function fetchAdventureDetails(adventureId) {
   try{
     let res = await fetch(
   
-      "https://qtrip-dynamic-jybk.onrender.com/adventures/detail?adventure="+adventureId
+      "http://15.206.226.139:8082/adventures/detail?adventure="+adventureId
   
     ).then((response) => {
       if (!response.ok) {
@@ -206,7 +206,7 @@ function captureFormSubmit(adventure) {
     body: JSON.stringify(update),
     };
   console.log(update);
-  let url = "https://qtrip-dynamic-jybk.onrender.com/reservations/new";
+  let url = "http://15.206.226.139:8082/reservations/new";
   fetch(url, {
      
     // Adding method type

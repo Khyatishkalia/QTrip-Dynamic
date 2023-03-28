@@ -8,7 +8,7 @@ async function fetchReservations() {
   try{
     let res = await fetch(
   
-      "https://qtrip-dynamic-jybk.onrender.com/reservations/"
+      "http://15.206.226.139:8082/reservations/"
   
     ).then((response) => {
       if (!response.ok) {
@@ -91,7 +91,7 @@ function addReservationToTable(reservations) {
     button.setAttribute("class","reservation-visit-button");
     button.setAttribute("id",reservations[i].id);
     //button.innerHTML = "Visit Adventure";
-    a.setAttribute("href",`https://qtrip-dynamic-jybk.onrender.com/frontend/pages/adventures/detail/?adventure=${reservations[i].adventure}`)
+    a.setAttribute("href",`http://15.206.226.139:8082/frontend/pages/adventures/detail/?adventure=${reservations[i].adventure}`)
     a.innerText="Visit Adventure";
     button.append(a);
     td7.append(button);
